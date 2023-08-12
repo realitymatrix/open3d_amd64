@@ -151,12 +151,12 @@ build_all() {
     cmake "${cmakeOptions[@]}" ..
     echo
     echo "Build & install Open3D..."
-    make VERBOSE=1 -j"$NPROC"
-    make VERBOSE=1 install -j"$NPROC"
+    make VERBOSE=0 -j"$NPROC"
+    make VERBOSE=0 install -j"$NPROC"
     if [[ "$BUILD_SHARED_LIBS" == "ON" ]]; then
         make package
     fi
-    make VERBOSE=1 install-pip-package -j"$NPROC"
+    make VERBOSE=0 install-pip-package -j"$NPROC"
     echo
 }
 
@@ -198,7 +198,7 @@ build_pip_package() {
     echo Building with CPU only...
     mkdir -p build
     pushd build # PWD=Open3D/build
-    cmakeOptions=("-DBUILD_SHARED_LIBS=OFF"
+    cmakeOptions=("-DBUILD_SHARED_LIBS=ON"
         "-DDEVELOPER_BUILD=$DEVELOPER_BUILD"
         "-DBUILD_COMMON_ISPC_ISAS=ON"
         "-DBUILD_AZURE_KINECT=$BUILD_AZURE_KINECT"
@@ -218,10 +218,10 @@ build_pip_package() {
     cmake -DBUILD_CUDA_MODULE=OFF "${cmakeOptions[@]}" ..
     set +x # Echo commands off
     echo
-    make VERBOSE=1 -j"$NPROC" pybind open3d_tf_ops open3d_torch_ops
+    make VERBOSE=0 -j"$NPROC" pybind open3d_tf_ops open3d_torch_ops
 
     echo "Packaging Open3D CPU pip package..."
-    make VERBOSE=1 -j"$NPROC" pip-package
+    make VERBOSE=0 -j"$NPROC" pip-package
     mv lib/python_package/pip_package/open3d*.whl . # save CPU wheel
 
     if [ "$BUILD_CUDA_MODULE" == ON ]; then
@@ -243,7 +243,7 @@ build_pip_package() {
     echo
 
     echo "Packaging Open3D full pip package..."
-    make VERBOSE=1 -j"$NPROC" pip-package
+    make VERBOSE=0 -j"$NPROC" pip-package
     mv open3d*.whl lib/python_package/pip_package/   # restore CPU wheel
     popd # PWD=Open3D
 }
