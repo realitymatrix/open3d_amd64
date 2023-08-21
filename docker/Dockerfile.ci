@@ -198,7 +198,7 @@ RUN if [ "${BUILD_PYTORCH_OPS}" = "ON" ] || [ "${BUILD_TENSORFLOW_OPS}" = "ON" ]
           -DBUILD_EXAMPLES=ON \
           -DCMAKE_INSTALL_PREFIX=~/open3d_install \
           .. \
- && make VERBOSE=1 -j$(nproc) \
+ && make VERBOSE=0 -j$(nproc) \
  && make install-pip-package -j$(nproc) \
  && make install -j$(nproc) \
  && if [ "${PACKAGE}" = "ON" ]; then make package; fi

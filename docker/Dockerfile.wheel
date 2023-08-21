@@ -128,6 +128,8 @@ RUN export NPROC=$(nproc) \
  && export BUILD_TENSORFLOW_OPS=ON \
  && export BUILD_PYTORCH_OPS=ON \
  && export BUILD_LIBREALSENSE=ON \
+ && export BUILD_WEBRTC=ON \
+ && export BUILD_WEBRTC_FROM_SOURCE=ON \
  && source /root/Open3D/util/ci_utils.sh \
  && build_pip_package build_jupyter
 
