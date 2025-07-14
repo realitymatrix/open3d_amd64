@@ -128,16 +128,12 @@ WORKDIR /root/Open3D
 
 # Build python wheel
 RUN export NPROC=$(nproc) \
-<<<<<<< HEAD
  && export BUILD_SHARED_LIBS=ON \
  && export BUILD_TENSORFLOW_OPS=ON \
  && export BUILD_PYTORCH_OPS=ON \
  && export BUILD_LIBREALSENSE=ON \
  && export BUILD_WEBRTC=ON \
  && export BUILD_WEBRTC_FROM_SOURCE=ON \
-=======
- && export BUILD_SHARED_LIBS=OFF \
->>>>>>> 7c0acac0a50293c52d2adb70967e729f98fa5018
  && source /root/Open3D/util/ci_utils.sh \
  && build_pip_package build_jupyter
 
